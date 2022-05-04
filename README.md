@@ -1,5 +1,5 @@
 # Note Everything and One
-<b>Note Everything and One</b> is a simple real time collaborative list. A single to-do list is shared among all connected users, who may add, edit, remove, or complete each list item and have their changes reflected in real time througout the user base.
+<b>Note Everything and One</b> is a simple real time collaborative list. A single to-do list is shared among all connected users, who may add, edit, remove, or complete each list item and have their changes reflected in real time throughout the user base.
 
 > This project was made as an assignment for the discipline of Distributed Systems at Instituto Federal Fluminense's Information Systems course. 
 
