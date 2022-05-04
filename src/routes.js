@@ -1,25 +1,40 @@
-const express = require('express')  
+const express = require("express");
 
-const routes = express.Router();  
+const routes = express.Router();
 
-let notes = ''
+let list = [];
 
-routes.get('/notes', (request, response) => {
-    return response.json({ note: notes })
-})
+routes.get("/list", (request, response) => {
+  return response.json({ list });
+});
 
-routes.post('/notes', (request, response) => {
-    const { note } = request.body
+routes.post("/item", (request, response) => {
+  const { item } = request.body;
 
-    if (note === undefined) {
-      return response.status(404).json({ message: 'not found proprety "note"'})
-    }
+  if (item === undefined) {
+    return response.status(404).json({ message: 'not found proprety "item"' });
+  }
 
-    notes = note
+  const itemCapitalized = item.charAt(0).toUpperCase() + item.slice(1);
 
-    request.io.emit('newNotes', notes)
+  list.push({
+    name: itemCapitalized,
+    checked: false,
+  });
 
-    return response.status(201).json({ message: 'success'})
-})
+  request.io.emit("newList", list);
+
+  return response.status(201).json({ message: "success" });
+});
+
+routes.put("/item", (request, response) => {
+  const { index, checked } = request.body;
+
+  list[index].checked = checked;
+
+  request.io.emit("newList", list);
+
+  return response.status(201).json({ message: "success" });
+});
 
 module.exports = routes;

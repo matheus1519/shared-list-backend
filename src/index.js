@@ -1,23 +1,22 @@
-const express = require('express')
-const cors = require('cors')
+const express = require("express");
+const cors = require("cors");
 
-const routes = require('./routes')
+const routes = require("./routes");
 
 const app = express();
-const server = require('http').Server(app);
-const io = require('socket.io')(server, { 
+
+const server = require("http").Server(app);
+const io = require("socket.io")(server, {
   cors: {
     origin: "*",
-    methods: ["GET", "POST"]
-  }
+    methods: ["GET", "POST"],
+  },
 });
 
 const connectedUsers = {};
 
-io.on('connection', socket => {
+io.on("connection", (socket) => {
   const { user } = socket.handshake.query;
-
-  // console.log(user);
 
   connectedUsers[user] = socket.id;
 });
